@@ -1,29 +1,35 @@
 <template>
   <section class="post-list">
     <PostPreview
-      id="1"
-      post-title="first post"
-      preview-text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem."
-      thumbnail="https://source.unsplash.com/random/400x200"
-    />
-    <PostPreview
-      id="2"
-      post-title="second post"
-      preview-text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem."
-      thumbnail="https://source.unsplash.com/random/400x200"
-    />
-    <PostPreview
-      id="3"
-      post-title="third post"
-      preview-text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quidem."
-      thumbnail="https://source.unsplash.com/random/400x200"
+      v-for="post in posts"
+      :id="post.id"
+      :key="post.id"
+      :is-admin="isAdmin"
+      :post-title="post.title"
+      :preview-text="post.previewText"
+      :thumbnail="post.thumbnail"
     />
   </section>
 </template>
 
 <script>
 import PostPreview from '~/components/Posts/PostPreview.vue'
-export default { components: { PostPreview } }
+export default {
+  components: { PostPreview },
+  props: {
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+    posts: {
+      type: Array,
+      required: true,
+    },
+  },
+  data() {
+    return {}
+  },
+}
 </script>
 
 <style>

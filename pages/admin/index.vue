@@ -1,19 +1,28 @@
 <template>
   <div class="admin-page">
     <section class="new-post">
-      <button>Create Post</button>
+      <AppButton @click="$router.push('/admin/new-post')"
+        >Create Post</AppButton
+      >
     </section>
     <section class="existing-posts">
       <h1>Existing Posts</h1>
-      <post-list />
+      <post-list is-admin :posts="loadedPosts" />
     </section>
   </div>
 </template>
 
 <script>
 import PostList from '~/components/Posts/PostList.vue'
+import AppButton from '~/components/UI/AppButton.vue'
 export default {
-  components: { PostList },
+  components: { PostList, AppButton },
+  layout: 'admin',
+  computed: {
+    loadedPosts() {
+      return this.$store.getters.loadedPosts
+    },
+  },
 }
 </script>
 

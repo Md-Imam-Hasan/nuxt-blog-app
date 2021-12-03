@@ -1,9 +1,37 @@
 <template>
-  <h1>new post</h1>
+  <div class="admin-new-post-page">
+    <section class="new-post-form">
+      <AdminPostForm @submit="onSubmit" />
+    </section>
+  </div>
 </template>
 
 <script>
-export default {}
+import AdminPostForm from '~/components/Admin/AdminPostForm.vue'
+export default {
+  components: {
+    AdminPostForm,
+  },
+  layout: 'admin',
+  methods: {
+    onSubmit(postData) {
+      this.$store
+        .dispatch('addPost', postData)
+        .then(() => this.$router.push('/admin'))
+    },
+  },
+}
 </script>
 
-<style></style>
+<style scoped>
+.new-post-form {
+  width: 90%;
+  margin: 20px auto;
+}
+
+@media (min-width: 768px) {
+  .new-post-form {
+    width: 500px;
+  }
+}
+</style>
