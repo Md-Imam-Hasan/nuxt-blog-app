@@ -17,9 +17,7 @@ export default {
   layout: 'admin',
   asyncData({ error, params }) {
     return axios
-      .get(
-        `https://nuxt-blog-106d2-default-rtdb.asia-southeast1.firebasedatabase.app/posts/${params.postId}.json`
-      )
+      .get(`${process.env.baseUrl}/posts/${params.postId}.json`)
       .then((res) => {
         return { loadedPost: { ...res?.data, id: params.postId } }
       })

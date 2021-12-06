@@ -23,9 +23,7 @@ const createStore = () => {
     actions: {
       nuxtServerInit({ commit }, context) {
         return axios
-          .get(
-            'https://nuxt-blog-106d2-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json'
-          )
+          .get(`${process.env.baseUrl}/posts.json`)
           .then((res) => {
             const postsArray = []
             Object.keys(res?.data).map((key) =>
@@ -41,10 +39,7 @@ const createStore = () => {
       addPost({ commit }, payload) {
         const createdPost = { ...payload, updatedAt: new Date() }
         return axios
-          .post(
-            'https://nuxt-blog-106d2-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json',
-            createdPost
-          )
+          .post(`${process.env.baseUrl}/posts.json`, createdPost)
           .then((res) =>
             commit('ADD_POST', { ...createdPost, id: res.data.name })
           )
@@ -52,10 +47,10 @@ const createStore = () => {
       },
       editPost({ commit }, payload) {
         return axios
-          .put(
-            `https://nuxt-blog-106d2-default-rtdb.asia-southeast1.firebasedatabase.app/posts/${payload.id}.json`,
-            { ...payload, updatedAt: new Date() }
-          )
+          .put(`${process.env.baseUrl}/posts/${payload.id}.json`, {
+            ...payload,
+            updatedAt: new Date(),
+          })
           .then((res) => commit('EDIT_POST', payload))
           .catch((e) => console.log(e))
       },

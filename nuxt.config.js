@@ -14,11 +14,16 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
+  loading: {
+    color: '#00ff00',
+    throttle: 0,
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ['~/assets/styles/main.css'],
+  css: ['~assets/styles/main.css'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: ['~plugins/core-component.js', '~plugins/date-filter.js'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -40,4 +45,8 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+  env: {
+    baseUrl:
+      'https://nuxt-blog-106d2-default-rtdb.asia-southeast1.firebasedatabase.app',
+  },
 }

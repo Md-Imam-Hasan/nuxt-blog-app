@@ -4,7 +4,7 @@
       <h1 class="post-title">{{ loadedPost.title }}</h1>
       <div class="post-details">
         <div class="post-detail">
-          Last updated at {{ loadedPost.updatedAt }}
+          Last updated at {{ loadedPost.updatedAt | date }}
         </div>
         <div class="post-detail">Written by {{ loadedPost.author }}</div>
       </div>
@@ -24,9 +24,7 @@ import axios from 'axios'
 export default {
   asyncData({ error, params }) {
     return axios
-      .get(
-        `https://nuxt-blog-106d2-default-rtdb.asia-southeast1.firebasedatabase.app/posts/${params.id}.json`
-      )
+      .get(`${process.env.baseUrl}/posts/${params.id}.json`)
       .then((res) => {
         return { loadedPost: res?.data }
       })
