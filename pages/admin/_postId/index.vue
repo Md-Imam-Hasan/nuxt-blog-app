@@ -15,6 +15,7 @@ export default {
     AdminPostForm,
   },
   layout: 'admin',
+  middleware: ['check-auth', 'auth'],
   asyncData({ error, params }) {
     return axios
       .get(`${process.env.baseUrl}/posts/${params.postId}.json`)
